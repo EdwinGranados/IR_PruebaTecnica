@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  api:
+    build: ./api
+    container_name: PT_IR_API
+    ports:
+      - "5000:80"
+    depends_on:
+      - DB
+    environment:
+      - ConnectionString_DB=server=DB;database=ptdatabase;User=admin;Pasword=admin123;
+  
+  DB:
+    image: mysql:8.0
+    container_name: PT_IR_DB
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ptdatabase
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./DB/db_data:/var/lib/mysql
+
+
