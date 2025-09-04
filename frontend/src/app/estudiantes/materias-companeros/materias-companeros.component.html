@@ -1,0 +1,17 @@
+<p-progressSpinner *ngIf="cargando"></p-progressSpinner>
+<div *ngIf="error" class="text-red-600">{{ error }}</div>
+
+<h2>Materias Inscritas</h2>
+
+<div *ngFor="let item of materiasConCompaneros" class="mb-3">
+  <p-panel [header]="item.materiaNombre" [toggleable]="true" [collapsed]="false">
+    <ul>
+      <li *ngFor="let compa of item.estudiantes">
+        {{ compa.nombre }} {{ compa.apellido }}
+      </li>
+      <li *ngIf="item.estudiantes.length === 0" class="text-gray-500">
+        No hay compañeros en esta materia
+      </li>
+    </ul>
+  </p-panel>
+</div>

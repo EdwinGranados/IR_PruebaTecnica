@@ -42,7 +42,7 @@ public class EstudiantesController : ControllerBase
         if (!result.Success)
             return BadRequest(result.Message);
 
-        return Ok(result.Message);
+        return Ok(result);
     }
 
     [HttpPut("{id}")]
@@ -50,14 +50,14 @@ public class EstudiantesController : ControllerBase
     {
         if (id != estudiante.Id) return BadRequest("ID no coincide");
         await _service.UpdateAsync(estudiante);
-        return Ok("Estudiante actualizado");
+        return Ok(estudiante);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         await _service.DeleteAsync(id);
-        return Ok("Estudiante eliminado");
+        return Ok(id);
     }
 }
 

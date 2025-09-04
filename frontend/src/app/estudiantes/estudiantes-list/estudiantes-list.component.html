@@ -1,1 +1,39 @@
-<p>estudiantes-list works!</p>
+<div class="card">
+  <div class="flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Estudiantes</h2>
+    <button pButton label="Nuevo Estudiante" icon="pi pi-plus" routerLink="/estudiantes/nuevo"></button>
+  </div>
+
+  <p-table [value]="estudiantes" [loading]="loading" class="w-full" [paginator]="true" [rows]="5"
+    responsiveLayout="scroll">
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Edad</th>
+        <th>Email</th>
+        <th>Materias</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-est>
+      <tr>
+        <td>{{ est.nombre }}</td>
+        <td>{{ est.apellido }}</td>
+        <td>{{ est.edad }}</td>
+        <td>{{ est.email }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let m of est.estudianteMaterias">{{ m.materia.nombre }}</li>
+          </ul>
+        </td>
+        <td>
+          <button pButton icon="pi pi-pencil" class="p-button-sm mr-2" (click)="editar(est)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger" (click)="eliminar(est.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

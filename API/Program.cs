@@ -20,18 +20,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: mycorsPolicy,
                       policy =>
                       {
-                          if (builder.Environment.IsDevelopment())
-                          {
-                              policy.WithOrigins("http://localhost:4200")
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod();
-                          }
-                          else
-                          {
+                      
                               policy.AllowAnyOrigin()
                                     .AllowAnyHeader()
                                     .AllowAnyMethod();
-                          }
+
                       });
 });
 // Add services to the container.
@@ -42,10 +35,17 @@ builder.Services.AddScoped<MateriaRepository>();
 builder.Services.AddScoped<MateriaService>();
 builder.Services.AddScoped<ProfesorRepository>();
 builder.Services.AddScoped<ProfesorService>();
+builder.Services.AddScoped<EstudianteMateriaRepository>();
+builder.Services.AddScoped<EstudianteMateriaService>();
 
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(opt =>
+    {
+        opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        opt.JsonSerializerOptions.WriteIndented = true;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

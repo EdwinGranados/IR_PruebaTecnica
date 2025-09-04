@@ -1,1 +1,33 @@
-<p>inscripcion-form works!</p>
+<div class="p-fluid p-4">
+  <!-- Selección de estudiante -->
+  <div class="field mb-3">
+    <label for="estudiante">Estudiante</label>
+    <p-dropdown
+      id="estudiante"
+      [options]="estudiantes"
+      [(ngModel)]="selectedEstudiante"
+      optionLabel="nombre"
+      placeholder="Seleccione un estudiante">
+    </p-dropdown>
+  </div>
+
+  <!-- Selección de materias -->
+  <div class="field mb-3">
+    <label for="materias">Materias (máx. 3)</label>
+    <p-multiSelect
+      id="materias"
+      [options]="materias"
+      [(ngModel)]="selectedMaterias"
+      optionLabel="nombre"
+      display="chip"
+      defaultLabel="Seleccione materias"
+      [selectionLimit]="3">
+    </p-multiSelect>
+  </div>
+
+  <!-- Botón guardar -->
+  <div class="field">
+    <button pButton type="button" label="Guardar Inscripción" icon="pi pi-save" (click)="save()"></button>
+  </div>
+</div>
+<p-toast />

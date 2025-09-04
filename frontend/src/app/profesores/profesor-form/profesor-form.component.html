@@ -1,1 +1,16 @@
-<p>profesor-form works!</p>
+<div class="card p-4">
+  <h2 *ngIf="!modoEdicion">Registrar Profesor</h2>
+  <h2 *ngIf="modoEdicion">Editar Profesor</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid gap-3">
+    <div class="col-12 md:col-6">
+      <label>Nombre</label>
+      <input pInputText formControlName="nombre" class="w-full" />
+    </div>
+
+    <div class="col-12 mt-3">
+      <button pButton type="submit" [label]="modoEdicion ? 'Actualizar' : 'Guardar'" icon="pi pi-save" [disabled]="form.invalid"></button>
+      <button pButton type="button" label="Cancelar" class="p-button-secondary ml-2" (click)="cancelar()"></button>
+    </div>
+  </form>
+</div>

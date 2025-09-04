@@ -1,1 +1,30 @@
-<p>profesores-list works!</p>
+<div class="card">
+  <div class="flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Profesores</h2>
+    <button pButton label="Nuevo Profesor" icon="pi pi-plus" (click)="nuevo()"></button>
+  </div>
+
+  <p-table [value]="profesores" [loading]="loading" class="w-full" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Materias Asignadas</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-prof>
+      <tr>
+        <td>{{ prof.nombre }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let m of prof.materias">{{ m.nombre }}</li>
+          </ul>
+        </td>
+        <td>
+          <button pButton icon="pi pi-pencil" class="p-button-sm mr-2" (click)="editar(prof)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger" (click)="eliminar(prof.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

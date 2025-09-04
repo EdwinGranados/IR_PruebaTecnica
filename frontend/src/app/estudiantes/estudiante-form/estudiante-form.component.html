@@ -1,1 +1,34 @@
-<p>estudiante-form works!</p>
+<div class="card p-4">
+  <h2 *ngIf="!modoEdicion">Registrar Estudiante</h2>
+  <h2 *ngIf="modoEdicion">Editar Estudiante</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid gap-3">
+    <div class="col-12 md:col-6">
+      <label>Nombre</label>
+      <input pInputText formControlName="nombre" class="w-full" />
+    </div>
+
+    <div class="col-12 md:col-6">
+      <label>Apellido</label>
+      <input pInputText formControlName="apellido" class="w-full" />
+    </div>
+
+    <div class="col-12 md:col-6">
+      <label>Edad</label>
+      <input type="number" pInputText formControlName="edad" class="w-full" />
+    </div>
+
+    <div class="col-12 md:col-6">
+      <label>Email</label>
+      <input type="email" pInputText formControlName="email" class="w-full" />
+    </div>
+
+    <div class="col-12 mt-3">
+      <button pButton type="submit" [label]="modoEdicion ? 'Actualizar' : 'Guardar'" icon="pi pi-save" [disabled]="form.invalid"></button>
+      <button pButton type="button" label="Cancelar" class="p-button-secondary ml-2" (click)="cancelar()"></button>
+    </div>
+  </form>
+</div>
+@if(modoEdicion){
+  <app-materias-companeros [estudianteId]="id!"></app-materias-companeros>
+}

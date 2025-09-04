@@ -33,7 +33,7 @@ namespace API.Controllers
         public async Task<IActionResult> Create([FromBody] Profesor profesor)
         {
             await _service.AddAsync(profesor);
-            return Ok("Profesor creado con éxito");
+            return Ok(profesor);
         }
 
         // PUT: api/profesores/5
@@ -42,7 +42,7 @@ namespace API.Controllers
         {
             if (id != profesor.Id) return BadRequest("El ID no coincide");
             await _service.UpdateAsync(profesor);
-            return Ok("Profesor actualizado con éxito");
+            return Ok(profesor);
         }
 
         // DELETE: api/profesores/5
@@ -50,7 +50,8 @@ namespace API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _service.DeleteAsync(id);
-            return Ok("Profesor eliminado con éxito");
+            return Ok(id);
         }
     }
+
 }

@@ -1,1 +1,30 @@
-<p>materias-list works!</p>
+<div class="card">
+  <div class="flex justify-content-between align-items-center mb-3">
+    <h2>Lista de Materias</h2>
+    <button pButton label="Nueva Materia" icon="pi pi-plus" (click)="nuevo()"></button>
+  </div>
+
+  <p-table [value]="materias" [loading]="loading" class="w-full" [paginator]="true" [rows]="5">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Créditos</th>
+        <th>Profesor</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-mat>
+      <tr>
+        <td>{{ mat.nombre }}</td>
+        <td>{{ mat.descripcion }}</td>
+        <td>{{ mat.creditos }}</td>
+        <td>{{ mat.profesor?.nombre }}</td>
+        <td>
+          <button pButton icon="pi pi-pencil" class="p-button-sm mr-2" (click)="editar(mat)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger" (click)="eliminar(mat.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

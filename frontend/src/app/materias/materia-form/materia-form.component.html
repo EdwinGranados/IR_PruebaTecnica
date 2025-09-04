@@ -1,1 +1,37 @@
-<p>materia-form works!</p>
+<div class="card p-4">
+  <h2 *ngIf="!modoEdicion">Registrar Materia</h2>
+  <h2 *ngIf="modoEdicion">Editar Materia</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid gap-3">
+    <div class="col-12 md:col-6">
+      <label>Nombre</label>
+      <input pInputText formControlName="nombre" class="w-full" />
+    </div>
+
+    <div class="col-12 md:col-6">
+      <label>Créditos</label>
+      <input type="number" pInputText formControlName="creditos" class="w-full" />
+    </div>
+
+    <div class="col-12">
+      <label>Descripción</label>
+      <input pInputText formControlName="descripcion" class="w-full" />
+    </div>
+
+    <div class="col-12">
+      <label>Profesor</label>
+      <p-dropdown
+        [options]="profesores"
+        optionLabel="nombre"
+        optionValue="id"
+        formControlName="profesorId"
+        placeholder="Seleccionar profesor">
+      </p-dropdown>
+    </div>
+
+    <div class="col-12 mt-3">
+      <button pButton type="submit" [label]="modoEdicion ? 'Actualizar' : 'Guardar'" icon="pi pi-save" [disabled]="form.invalid"></button>
+      <button pButton type="button" label="Cancelar" class="p-button-secondary ml-2" (click)="cancelar()"></button>
+    </div>
+  </form>
+</div>

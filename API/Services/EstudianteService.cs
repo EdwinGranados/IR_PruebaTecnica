@@ -22,16 +22,7 @@ namespace API.Services
 
         public async Task<(bool Success, string Message)> RegisterAsync(Estudiante estudiante, List<int> materiasIds)
         {
-            if (materiasIds.Count > 3)
-                return (false, "El estudiante no puede inscribir más de 3 materias");
-
-            var materias = await _materiaRepository.GetByIdsAsync(materiasIds);
-
-            var profesores = materias.Select(m => m.ProfesorId).Distinct();
-            if (profesores.Count() < materias.Count)
-                return (false, "No se pueden inscribir dos materias con el mismo profesor");
-
-            estudiante.EstudianteMaterias = materiasIds.Select(materiaId => new EstudianteMateria
+          estudiante.EstudianteMaterias = materiasIds.Select(materiaId => new EstudianteMateria
             {
                 Estudiante = estudiante,
                 MateriaId = materiaId
